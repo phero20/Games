@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock-Paper-Scissor</title>
+    <link rel="stylesheet" href="rock.css">
+</head>
+<body>
+    <h1><img src="imgs\rock-paper-scissors.png" alt="">Rock-Paper-Scissor</h1>
+    <div class="choices">
+        <div class="choice" id="Rock"><img src="imgs\fist.png" alt=""></div>
+    <div class="choice" id="Paper"><img src="imgs\five.png" alt=""></div>
+    <div class="choice" id="Scissor"><img src="imgs\scissor.png" alt=""></div>
+    </div>
+    
+    <div class="scoreboard">
+        <div class="score"> <p class="my">0</p>
+        <p>You</p>
+        </div>
+        <div class="score">   <p class="computer">0</p>
+            <p>AI</p>
+            </div> 
+    </div>
+    <div class="mess">Play Your Move</div>
+    <button class="reset">Reset</button>
+    <script>
+        let youscore = 0;
+        let aiscore = 0;
+        let result=document.querySelector(".mess")
+        const choices = document.querySelectorAll(".choice"); // Use querySelectorAll
+        choices.forEach((choice) => {
+            choice.addEventListener("click", () => {
+                let userchoice=choice.getAttribute("id")
+                // console.log("press",userchoice);
+                playgame(userchoice);
+                computerchoice()
+            });
+        });
+        const playgame = (userchoice) => {
+            let compchoice = computerchoice();
+            if (userchoice === compchoice) {
+                result.textContent = `Draw! Both chose ${userchoice}`;
+                result.style.background = "#09203F";
+            } else {
+                let userwin = true;
+                if (userchoice === "rock") {
+                    userwin = compchoice === "paper" ? false : true;
+                } else if (userchoice === "paper") {
+                    userwin = compchoice === "scissor" ? false : true;
+                } else {
+                    userwin = compchoice === "rock" ? false : true;
+                }
+                showwinnner(userwin, compchoice, userchoice);
+            }
+        }
+
+        const computerchoice = () => {
+            let array = ["rock", "paper", "scissor"];
+            let compchoice = Math.floor(Math.random() * 3);
+            return array[compchoice];
+        }
+
+        const showwinnner = (userwin, compchoice, userchoice) => {
+            if (userwin) {
+                result.textContent = `You won! Your ${userchoice} beats ${compchoice}`;
+                result.style.background = "linear-gradient(135deg, #00c851, #007e33)";
+                youscore++;
+                document.querySelector(".my").textContent = youscore;
+            } else {
+                result.textContent = `You lose! ${compchoice} beats your ${userchoice}`;
+                result.style.background = "linear-gradient(135deg, #ff0000, #8b0000)";
+                aiscore++;
+                document.querySelector(".computer").textContent = aiscore;
+            }
+        }
+
+        document.querySelector(".reset").addEventListener("click", () => {
+            youscore = 0;
+            aiscore = 0;
+            document.querySelector(".my").textContent = youscore;
+            document.querySelector(".computer").textContent = aiscore;
+            result.textContent = "Play Your Move";
+            result.style.background = "";
+        });
+     </script>
+</body>
+</html>
