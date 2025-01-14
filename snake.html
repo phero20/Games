@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>snake</title>
+    <link rel="stylesheet" href="snake.css">
+</head>
+
+<body>
+    <div class="g">
+        <p class="p">Snake Game Ke Jaisa</p>
+        <p id="w"></p>
+    </div>
+    <main>
+        <div class="container">
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+        </div>
+    </main>
+    <div class="bt">
+        <button class="dice">1</button>
+        <button class="reset">Reset</button>
+    </div>
+   
+    <script>
+        let dise = document.querySelector('.dice');
+        let boxes = document.querySelectorAll('.box');
+        let i = 1;
+        let position1 = 0;
+        let position2 = 0;
+        let position3 = 0;
+        let prev1 = 0;
+        let prev2 = 0;
+        let prev3 = 0;
+        let col1 = document.createElement('div');
+        let col2 = document.createElement('div');
+        let col3 = document.createElement('div');
+        col1.setAttribute('class', `col1`);
+        col2.setAttribute('class', `col2`);
+        col3.setAttribute('class', `col3`);
+        col1.textContent = '1';
+        col2.textContent = '2';
+        col3.textContent = '3';
+        boxes[0].appendChild(col1);
+        boxes[0].appendChild(col2);
+        boxes[0].appendChild(col3);
+        let gameOver1 = false;
+        let gameOver2 = false;
+        let gameOver3 = false;
+        let winner1 = "";
+        let w = document.querySelector('#w');
+
+        dise.addEventListener('click', () => {
+            let random = Math.floor(Math.random() * 6) + 1;
+            dise.textContent = random;
+            dise.classList.add('click-animation');
+            
+            setTimeout(() => {
+                dise.classList.remove('click-animation');
+            }, 100);
+            
+            dise.disabled = true;
+            move(random);
+            dise.disabled = false;
+        })
+
+        function move(random) {
+            console.log(`Player ${i} rolled ${random}`);
+            
+            if (i == 1 && !gameOver1) {
+                prev1 = position1;
+                boxes[prev1].removeChild(col1);
+                position1 += random;
+                if (position1 < boxes.length) {
+                    boxes[position1].appendChild(col1);
+                } else {
+                    alert("Player 1 wins!");
+                    winner1 = "1";
+                    gameOver1 = true;
+                    w.innerHTML += ` winner : ${winner1}`;  // Update the DOM element here
+                }
+                dise.style.backgroundImage = "linear-gradient(to right, #e74c3c 0%, #e67e22 100%)"; // Change dice color
+                if (!gameOver1) i++;
+            } else if (i == 2 && !gameOver2) {
+                prev2 = position2;
+                boxes[prev2].removeChild(col2);
+                position2 += random;
+                if (position2 < boxes.length) {
+                    boxes[position2].appendChild(col2);
+                } else {
+                    alert("Player 2 wins!");
+                    winner1 = "2";
+                    gameOver2 = true;
+                    w.innerHTML += ` winner : ${winner1}`;  // Update the DOM element here
+                }
+                dise.style.backgroundImage = "linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%)"; // Change dice color
+                if (!gameOver2) i++;
+            } else if (i == 3 && !gameOver3) {
+                prev3 = position3;
+                boxes[prev3].removeChild(col3);
+                position3 += random;
+                if (position3 < boxes.length) {
+                    boxes[position3].appendChild(col3);
+                } else {
+                    alert("Player 3 wins!");
+                    winner1 = "3";
+                    gameOver3 = true;
+                    w.innerHTML += ` winner : ${winner1}`; // Update the DOM element here
+                }
+                dise.style.backgroundImage = "linear-gradient(to top, #27ae60 0%, #2ecc71 100%)";  // Change dice color
+                if (!gameOver3) i = 1;
+            }
+
+            // Skip the players who have already won
+            while ((i == 1 && gameOver1) || (i == 2 && gameOver2) || (i == 3 && gameOver3)) {
+                i = (i % 3) + 1;
+            }
+        
+            console.log(`Player ${i} position: ${position1}, ${position2}, ${position3}`);
+            
+            if (gameOver1 && gameOver2 || gameOver1 && gameOver3 || gameOver2 && gameOver3) {
+                console.log(winner1);
+                winnnn();  // Call the winnnn function
+            }
+        }
+
+        function resetGame() {
+            // Reset positions and game states
+            position1 = 0;
+            position2 = 0;
+            position3 = 0;
+            gameOver1 = false;
+            gameOver2 = false;
+            gameOver3 = false;
+            winner1 = "";
+            w.innerHTML = "";
+
+            // Remove existing elements and add new ones
+            boxes[position1].appendChild(col1);
+            boxes[position2].appendChild(col2);
+            boxes[position3].appendChild(col3);
+
+            // Reset dice text and background color
+            dise.textContent = "1";
+            dise.style.backgroundImage = "";
+            i = 1;
+
+            // Show main elements again
+            document.querySelector("main").style.display = "flex";
+            dise.style.display = "block";
+        }
+
+        document.querySelector(".reset").addEventListener('click', resetGame);
+
+        function winnnn() {
+            document.querySelector("main").style.display = "none";
+            dise.style.display = "none";
+        }
+    </script>
+</body>
+
+</html>

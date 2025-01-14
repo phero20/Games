@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <style>
+      * {
+         padding: 0;
+         margin: 0;
+      }
+
+      main {
+         width: 100%;
+         height: 100vh;
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-items: center;
+         color: rgb(249, 21, 127);
+         position: relative;
+         overflow: hidden;
+         font-weight: 800;
+      }
+
+      body {
+         background: radial-gradient(circle at center, #000428 0%, #004e92 100%);
+         text-align: center;
+         display: flex;
+         align-items: center;
+         width: 100vw;
+      }
+
+      .board {
+         height: 50vmin;
+         width: 50vmin;
+         /* background-color: rgb(29, 31, 31); */
+         display: flex;
+         flex-wrap: wrap;
+         justify-content: space-evenly;
+         align-items: center;
+         margin: 30px;
+      }
+
+      .box {
+         width: 30%;
+         height: 30%;
+         border: none;
+         border-radius: 10px;
+         background-color: rgb(195, 218, 93);
+         cursor: pointer;
+         font-size: 8vmin;
+         color: rgb(255, 71, 71);
+         box-shadow: 0 0 10px 0 rgba(223, 222, 222, 0.5);
+      }
+
+      .d {
+         height: 5vmin;
+         width: 15vmin;
+         border: none;
+         border-radius: 10px;
+         background-color: rgb(249, 21, 127);
+         cursor: pointer;
+         font-size: 3vmin;
+        color: rgb(195, 218, 93);
+         box-shadow: 0 0 10px 0 rgba(223, 222, 222, 0.5);
+      }
+      .winnerr{
+         margin: 10px;
+         color: rgb(36, 245, 116);
+         font-size: 10vmin;
+         display: none;
+         justify-content: center;
+         align-items: center;
+         height: 80vh;
+         width: 100vw;
+
+      }
+   </style>
+</head>
+
+<body>
+   <main>
+      <p class="winnerr"></p>
+      <h1>Tic-Tac-Toe</h1>
+      <div class="board">
+         <button class="box"></button>
+         <button class="box"></button>
+         <button class="box"></button>
+         <button class="box"></button>
+         <button class="box"></button>
+         <button class="box"></button>
+         <button class="box"></button>
+         <button class="box"></button>
+         <button class="box"></button>
+      </div>
+      <button class="d">Reset</button>
+   </main>
+   <script>
+      let boxes = document.querySelectorAll('.box');
+      let reset = document.querySelector('.d');
+      let player0 = true;
+      let player1 = false;
+      const win = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+      boxes.forEach((box) => {
+         box.addEventListener('click', () => {
+            if (player0) {
+               box.textContent = 'X';
+               player0 = false;
+               player1 = true;
+            }
+            else {
+               box.textContent = 'O';
+               player0 = true;
+               player1 = false;
+            }
+            box.disabled = true;
+            winner();
+           
+         })
+      })
+      const winner = () => {
+               for (const pattern of win) {
+                  let position1 = boxes[pattern[0]].textContent;
+                  let position2 = boxes[pattern[1]].textContent;
+                  let position3 = boxes[pattern[2]].textContent;
+                  if (position1 != "" && position2 != "" && position3 != "") {
+                     if (position1 == position2 && position2 == position3) {
+                        document.querySelector('.winnerr').textContent = `${position1} wins`;
+                        document.querySelector("h1").style.display = "none";
+                        document.querySelector(".board").style.display = "none";
+                        document.querySelector('.winnerr').style.display = "flex";
+                        boxes.forEach((box) => {
+                           box.disabled = true;
+                        })
+                     }
+                  }
+
+               }
+            }
+      reset.addEventListener('click', () => {
+         player0 = true;
+         player1 = false;
+         boxes.forEach((box) => {
+            box.textContent = "";
+            box.disabled = false;
+            document.querySelector('.winnerr').textContent = "";
+            document.querySelector("h1").style.display = "block";
+            document.querySelector(".board").style.display = "flex";
+            document.querySelector('.winnerr').style.display = "none";
+         })
+      });
+   </script>
+</body>
+
+</html>
