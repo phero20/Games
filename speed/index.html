@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: linear-gradient(135deg, #48c6ef 10%, #6f86d6 100%);
+            color: #333;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100vh;
+            width: 100%;
+            padding: 20px;
+            overflow: hidden;
+            align-items: center;
+        }
+
+        h1 {
+            background-image: linear-gradient(135deg, #09203f 10%, #1e3343 100%);
+            color: #ffecd2;
+            font-size: 4vmin;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-shadow: 0 0 3px #00000071, 0 0 5px #0000004d;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            margin-bottom: 10px;
+            width: 100%;
+            font-weight: 900;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.707);
+        }
+
+        .container {
+            font-family: 'Lora', serif;
+            font-size: 4vmin;
+            line-height: 1.6;
+            word-spacing: 1.1vw;
+            border-radius: 20px;
+            background-image: linear-gradient(135deg, #ffecd2 10%, #fcb69f 100%);
+            padding: 20px;
+            overflow-y: auto;
+            color: rgb(9, 9, 39);
+            flex: 1;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.707);
+            width: 95%;
+            font-weight: 550;
+            text-align: justify;
+            /* Ensures the text is justified */
+            text-align-last: center;
+            /* Ensures the last line is centered */
+        }
+
+        .container::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .container {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .results {
+            font-size: 2vmin;
+            padding: 5px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+            margin-top: 10px;
+            width: 100%;
+            overflow: visible;
+        }
+
+        .reset {
+            background-color: #640d0d;
+            /* Change to red with important flag */
+            color: rgb(47, 255, 85);
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            z-index: 2;
+            width: 24%;
+            height: 100%;
+            border: none;
+            padding: 20px 20px;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: background-color 1s ease;
+            transition: color 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.707);
+            font-weight: 700;
+            font-size: 3vmin;
+        }
+
+        .results p {
+            font-size: 3vmin;
+            width: 24%;
+            height: 100%;
+            background-image: linear-gradient(135deg, #09203f 10%, #1e3343 100%);
+            border: none;
+            padding: 20px 20px;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.707);
+            font-weight: 700;
+        }
+
+        .results .time {
+            font-weight: bold;
+            color: #4facfe;
+        }
+
+
+        .reset:hover {
+            background-color: #24bd24 !important;
+            color: #b01b1b;
+            /* Change to green on hover with important flag */
+        }
+
+        .error {
+            color: #ff0947;
+        }
+
+        .word {
+            color: rgb(47, 255, 85);
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 4vmin;
+            }
+
+            .container {
+                font-size: 4vmin;
+            }
+
+            .results p {
+                font-size: 2vmin;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <h1>Typing Test</h1>
+        <div class="container">
+            <p class="paragraph">Two members of the 1984 class of Jefferson High School are chairing a group of 18 look for a resort for the 20-year class reunion. A lovely place 78 miles from the city turns out to be
+                the best. It has 254 rooms and a banquet hall to seat 378. It has been open 365 days per year since
+                opening on May 30, 1926. They will need 450 to reserve the resort. Debbie Holmes was put in charge of
+                buying 2,847 office machines for the entire firm. Debbie visited more than 109 companies in 35 states in
+                6 months. She will report to the board today in Room 2784 at 5 p.m. The board will consider her report
+                about those 109 firms and recommend the top 2 or 3 brands to purchase. Debbie must decide before August
+                16. Lynn Greene said work started on the project March 27, 2003. The 246 blueprints were mailed to the
+                office 18 days ago. The prints had to be 100 percent accurate before they were acceptable. The project
+                should be finished by May 31, 2025. At that time there will be 47 new condominiums, each having at least
+                16 rooms. The building will be 25 stories.</p>
+        </div>
+        <div class="results">
+            <p class="time">Time: <span id="timer">60</span> seconds</p>
+            <p class="word">WPM : &nbsp;<span id="words"> 0</span></p>
+            <p class="error">Errors : &nbsp;<span id="errors"> 0</span></p>
+            <div class="reset" onclick="resetGame()">Reset</div>
+            </div>
+            </div>
+            
+            <!-- Hidden input field to trigger keyboard on mobile -->
+            <input type="text" id="hidden-input" style="opacity: 0; position: absolute;">
+            
+            <script>
+                let p = document.querySelector(".paragraph");
+                let originalText = p.textContent.split('');
+                let wordsArray = p.textContent.split(' ');
+                let wpm = document.querySelector("#words");
+                let errors = document.querySelector("#errors");
+            
+                let currentIndex = 0;
+                let words = 0;
+                let error = 0;
+                let active = true;
+                let typeword = "";
+                let wordStartIndex = 0;
+                let timerStarted = false;
+                let timer;
+                let timeLeft = 60;
+            
+                // Display the text with each letter in a span
+                const textElement = document.querySelector(".paragraph");
+                textElement.innerHTML = '';
+                originalText.forEach((char, index) => {
+                    const span = document.createElement('span');
+                    span.textContent = char;
+                    span.id = `char-${index}`;
+                    textElement.appendChild(span);
+                });
+            
+                function startTimer() {
+                    timer = setInterval(() => {
+                        if (timeLeft > 0) {
+                            timeLeft--;
+                            document.getElementById('timer').textContent = timeLeft;
+                        } else {
+                            clearInterval(timer);
+                            active = false;
+                            document.getElementById('hidden-input').removeEventListener("input", calculate);
+                            console.log("Typing test ended");
+                            console.log("Words typed correctly: " + words);
+                            console.log("Errors: " + error);
+                        }
+                    }, 1000);
+                }
+            
+                function resetGame() {
+                    clearInterval(timer);
+                    timeLeft = 60;
+                    document.getElementById('timer').textContent = timeLeft;
+                    currentIndex = 0;
+                    words = 0;
+                    error = 0;
+                    active = true;
+                    typeword = "";
+                    wordStartIndex = 0;
+                    timerStarted = false;
+                    wpm.textContent = words;
+                    errors.textContent = error;
+                    updateText();
+                    document.getElementById('hidden-input').addEventListener("input", calculate);
+                    document.getElementById('hidden-input').focus();
+                }
+            
+                function updateText() {
+                    originalText.forEach((char, index) => {
+                        const span = document.getElementById(`char-${index}`);
+                        if (index < currentIndex) {
+                            span.style.color = "green";
+                        } else {
+                            span.style.color = "black";
+                        }
+                    });
+                }
+            
+                function calculate(e) {
+                    if (!active) return;
+                    if (!timerStarted) {
+                        startTimer();
+                        timerStarted = true;
+                    }
+            
+                    let userkey = e.data;
+                    if (userkey && userkey.length === 1) {
+                        if (originalText[currentIndex] === userkey) {
+                            document.getElementById(`char-${currentIndex}`).style.color = "green";
+                        } else {
+                            document.getElementById(`char-${currentIndex}`).style.color = "red";
+                        }
+                        typeword += userkey;
+            
+                        if (currentIndex < originalText.length) {
+                            currentIndex++;
+                            updateText();
+                        }
+                    }
+            
+                    if (userkey === " ") {
+                        e.preventDefault();
+                        let typedText = typeword.trim();
+                        let correctWord = wordsArray.shift();
+            
+                        if (typedText === correctWord) {
+                            words++;
+                            wpm.textContent = words;
+                        } else {
+                            error++;
+                            errors.textContent = error;
+                        }
+            
+                        typeword = "";
+                    }
+            
+                    console.log("Words: ", words);
+                    console.log("Errors: ", error);
+            
+                    // Clear the hidden input field to capture the next input
+                    document.getElementById('hidden-input').value = '';
+                }
+            
+                document.getElementById('hidden-input').addEventListener("input", calculate);
+            
+                // Focus the hidden input field to trigger the keyboard on mobile
+                window.onload = function() {
+                    document.getElementById('hidden-input').focus();
+                };
+            </script>
+            </body>
+            </html>
